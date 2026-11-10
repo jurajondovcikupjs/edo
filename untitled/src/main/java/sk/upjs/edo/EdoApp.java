@@ -18,7 +18,7 @@ public class EdoApp extends Application {
         Parent rootPane = loader.load();
 
         var scene = new Scene(rootPane);
-        stage.setTitle("Log in");
+        stage.setTitle("Prihlásenie");
         stage.setScene(scene);
         applyWindowIcon(stage);
         stage.show();
