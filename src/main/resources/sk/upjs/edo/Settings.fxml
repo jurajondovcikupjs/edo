@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="520.0" prefWidth="420.0" spacing="15.0" style="-fx-background-color: #f4f4f9; -fx-padding: 25;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.upjs.edo.SettingsController">
+
+    <!-- Nadpis -->
+    <Label text="Nastavenia">
+        <font>
+            <Font name="System Bold" size="22.0" />
+        </font>
+    </Label>
+
+    <Separator />
+
+    <!-- 1. Jazyk -->
+    <VBox spacing="6.0">
+        <Label text="Jazyk aplikácie:" textFill="#333333">
+            <font><Font name="System Bold" size="13.0" /></font>
+        </Label>
+        <ChoiceBox fx:id="languageChoiceBox" maxWidth="Infinity" style="-fx-pref-height: 35; -fx-background-radius: 5;" />
+    </VBox>
+
+    <!-- 2. Téma -->
+    <VBox spacing="6.0">
+        <Label text="Vzhľad a téma:" textFill="#333333">
+            <font><Font name="System Bold" size="13.0" /></font>
+        </Label>
+        <ComboBox fx:id="themeComboBox" maxWidth="Infinity" promptText="Vyberte tému" style="-fx-pref-height: 35; -fx-background-radius: 5;" />
+    </VBox>
+
+    <!-- 3. Accent Farba -->
+    <VBox spacing="6.0">
+        <Label text="Farba zvýraznenia:" textFill="#333333">
+            <font><Font name="System Bold" size="13.0" /></font>
+        </Label>
+         <Label text="Prispôsobiť hlavnú farbu prvkov" textFill="#777777" />
+         <ColorPicker fx:id="accentColorPicker" style="-fx-pref-height: 35; -fx-background-radius: 5;">
+             <value>
+                 <Color red="0.0" green="0.48" blue="1.0" />
+             </value>
+         </ColorPicker>
+    </VBox>
+
+    <Separator />
+
+    <!-- 4. Notifikácie -->
+    <VBox spacing="8.0">
+        <Label text="Notifikácie:" textFill="#333333">
+            <font><Font name="System Bold" size="13.0" /></font>
+        </Label>
+        <CheckBox fx:id="notificationsCheckBox" selected="true" text="Povoliť systémové notifikácie" textFill="#555555" />
+        <CheckBox fx:id="soundCheckBox" selected="true" text="Prehrávať zvuky pri upozorneniach" textFill="#555555" />
+    </VBox>
+
+    <!-- Tlačidlá Uložiť / Zrušiť -->
+    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+        <VBox.margin>
+            <Insets top="15.0" />
+        </VBox.margin>
+        <Button fx:id="cancelButton" onAction="#handleCancel" style="-fx-background-color: #e0e0e0; -fx-text-fill: #333333; -fx-pref-height: 35; -fx-pref-width: 90; -fx-background-radius: 5; -fx-cursor: hand;" text="Zrušiť" />
+        <Button fx:id="saveButton" onAction="#handleSave" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-height: 35; -fx-pref-width: 90; -fx-background-radius: 5; -fx-cursor: hand;" text="Uložiť" />
+    </HBox>
+
+</VBox>
