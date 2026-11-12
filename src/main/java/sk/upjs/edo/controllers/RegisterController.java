@@ -1,12 +1,15 @@
-package sk.upjs.edo;
+package sk.upjs.edo.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-
-import java.util.concurrent.TimeUnit;
+import sk.upjs.edo.Factory;
+import sk.upjs.edo.exceptions.BadRequestException;
+import sk.upjs.edo.exceptions.NotFoundException;
+import sk.upjs.edo.users.User;
+import sk.upjs.edo.users.UserDao;
 
 public class RegisterController {
 
@@ -28,8 +31,10 @@ public class RegisterController {
     @FXML
     private Text infoText;
 
+    private final UserDao userDao = Factory.INSTANCE.getUserDao();
+
     @FXML
-    private void handleRegisterAction() throws InterruptedException {
+    private void handleRegisterAction() throws NotFoundException, BadRequestException {
         String name = nameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
@@ -56,9 +61,12 @@ public class RegisterController {
         }
 
         // register user logic
+        User newUser = new User(null, name, email, password, java.time.LocalDate.now(), true);
+        User createdUser = userDao.create(newUser);
+
         infoText.setText("Registrácia úspešná!");
         infoText.setFill(javafx.scene.paint.Color.GREEN);
-        System.out.println("Registrácia používateľa: " + name + " (" + email + ")");
+        System.out.println(createdUser);
     }
 
     @FXML

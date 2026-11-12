@@ -21,12 +21,11 @@ CREATE TABLE IF NOT EXISTS `enum_accent_colors` (
                                                     PRIMARY KEY(`accent_color_id`)
 );
 
-
 CREATE TABLE IF NOT EXISTS `users` (
                                        `user_id` BIGINT AUTO_INCREMENT UNIQUE,
                                        `name` VARCHAR(100) NOT NULL,
                                        `email` VARCHAR(255) NOT NULL UNIQUE,
-                                       `password_hash` VARCHAR(128) NOT NULL UNIQUE,
+                                       `password_hash` VARCHAR(128) NOT NULL,
                                        `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                                        `active` BOOLEAN NOT NULL DEFAULT true,
                                        PRIMARY KEY(`user_id`)

@@ -1,10 +1,13 @@
-package sk.upjs.edo;
+package sk.upjs.edo.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import sk.upjs.edo.EdoApp;
+import sk.upjs.edo.Factory;
+import sk.upjs.edo.users.UserDao;
 
 public class LoginController {
 
@@ -20,14 +23,20 @@ public class LoginController {
     @FXML
     private Button createAccountButton;
 
+    private final UserDao userDao = Factory.INSTANCE.getUserDao();
+
     @FXML
     private void handleLoginAction() {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        // login
-        System.out.println("Používateľ: " + username);
-        System.out.println("Heslo: " + password);
+        // Check if the user exists and the password is correct
+        if (userDao.authenticate(username, password)) {
+            System.out.println("Prihlásenie úspešné");
+            System.out.println("Prihlásený používateľ: " + username);
+        } else {
+            System.out.println("Prihlásenie zlyhalo");
+        }
     }
 
     @FXML

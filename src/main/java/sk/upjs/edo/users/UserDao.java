@@ -21,4 +21,5 @@ public interface UserDao {
 
     User reactivate(Long id) throws NotFoundException;
 
+    boolean authenticate(String username, String password);
 }

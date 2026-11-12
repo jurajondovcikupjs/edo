@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="520.0" prefWidth="420.0" spacing="15.0" style="-fx-background-color: #f4f4f9; -fx-padding: 25;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.upjs.edo.SettingsController">
+<VBox prefHeight="520.0" prefWidth="420.0" spacing="15.0" style="-fx-background-color: #f4f4f9; -fx-padding: 25;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.upjs.edo.controllers.SettingsController">
 
     <!-- Nadpis -->
     <Label text="Nastavenia">
@@ -45,12 +45,12 @@
         <Label text="Farba zvýraznenia:" textFill="#333333">
             <font><Font name="System Bold" size="13.0" /></font>
         </Label>
-         <Label text="Prispôsobiť hlavnú farbu prvkov" textFill="#777777" />
-         <ColorPicker fx:id="accentColorPicker" style="-fx-pref-height: 35; -fx-background-radius: 5;">
-             <value>
-                 <Color red="0.0" green="0.48" blue="1.0" />
-             </value>
-         </ColorPicker>
+        <Label text="Prispôsobiť hlavnú farbu prvkov" textFill="#777777" />
+        <ColorPicker fx:id="accentColorPicker" style="-fx-pref-height: 35; -fx-background-radius: 5;">
+            <value>
+                <Color red="0.0" green="0.48" blue="1.0" />
+            </value>
+        </ColorPicker>
     </VBox>
 
     <Separator />

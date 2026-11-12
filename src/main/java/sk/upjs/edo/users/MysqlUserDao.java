@@ -29,13 +29,13 @@ public class MysqlUserDao implements UserDao {
             throw new BadRequestException("User cannot be null");
         }
 
-        if (user.id() != null && !user.id().equals(0L)) {
-            throw new BadRequestException("Created user cannot have id");
+        if (user.user_id() != null && !user.user_id().equals(0L)) {
+            throw new BadRequestException("Created user cannot have user_id");
         }
 
         var query = """
                 INSERT INTO users
-                 (email, name, password_hash, created_at, active)
+                 (name, email, password_hash, created_at, active)
                  VALUES
                  (?,?,?,?,?)
                """;
@@ -44,8 +44,8 @@ public class MysqlUserDao implements UserDao {
 
         this.jdbcOperations.update(conn -> {
             var ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, user.email());
-            ps.setString(2, user.name());
+            ps.setString(1, user.name());
+            ps.setString(2, user.email());
             ps.setString(3, user.passwordHash());
             ps.setDate(4, Date.valueOf(user.createdAt()));
             ps.setBoolean(5, user.active());
@@ -66,11 +66,11 @@ public class MysqlUserDao implements UserDao {
             throw new BadRequestException("Cannot update inactive user");
         }
 
-        if (user.id() == null || user.id().equals(0L)) {
-            throw new BadRequestException("Updated user must have an id");
+        if (user.user_id() == null || user.user_id().equals(0L)) {
+            throw new BadRequestException("Updated user must have an user_id");
         }
 
-        if (!findById(user.id()).active()) {
+        if (!findById(user.user_id()).active()) {
             throw new BadRequestException("Cannot update inactive user");
         }
 
@@ -81,7 +81,7 @@ public class MysqlUserDao implements UserDao {
                      password_hash = ?,
                      created_at = ?,
                      active = ?
-                 WHERE id = ?
+                 WHERE user_id = ?
                 """;
         this.jdbcOperations.update(
                 query,
@@ -89,27 +89,27 @@ public class MysqlUserDao implements UserDao {
                 user.email(),
                 user.passwordHash(),
                 Date.valueOf(user.createdAt()),
-                user.active(),
-                user.id()
+                true,
+                user.user_id()
         );
 
-        return this.findById(user.id());
+        return this.findById(user.user_id());
     }
 
     @Override
-    public User findById(Long id) throws NotFoundException {
+    public User findById(Long user_id) throws NotFoundException {
         var query = """
-                SELECT id, email, name, password_hash, created_at, active
-                 FROM users 
-                 WHERE id = ? 
-                """;
+                SELECT user_id, name, email, password_hash, created_at, active
+                 FROM users\s
+                 WHERE user_id = ?\s
+               \s""";
         try {
             return this.jdbcOperations
-                    .queryForObject(query, rowMapper, id);
+                    .queryForObject(query, rowMapper, user_id);
         } catch (IncorrectResultSizeDataAccessException e) {
             throw new NotFoundException(
-                    "User with id %d not found"
-                            .formatted(id)
+                    "User with user_id %d not found"
+                            .formatted(user_id)
             );
         }
     }
@@ -117,10 +117,10 @@ public class MysqlUserDao implements UserDao {
     @Override
     public User findByEmail(String email) throws NotFoundException {
         var query = """
-                SELECT id, email, name, password_hash, created_at, active
-                 FROM users 
-                 WHERE email = ? 
-                """;
+                SELECT user_id, name, email, password_hash, created_at, active
+                 FROM users\s
+                 WHERE email = ?\s
+               \s""";
         try {
             return this.jdbcOperations
                     .queryForObject(query, rowMapper, email);
@@ -135,22 +135,32 @@ public class MysqlUserDao implements UserDao {
     @Override
     public List<User> findAll() {
         var query = """
-                SELECT id, email, name, password_hash, created_at, active
-                 FROM users 
-                """;
+                SELECT user_id, name, email, password_hash, created_at, active
+                 FROM users\s
+               \s""";
 
         return Collections.unmodifiableList(this.jdbcOperations.query(query, rowMapper));
     }
 
     @Override
-    public void deactivate(Long id) {
-        jdbcOperations.update("UPDATE users SET active = false WHERE id = ?", id);
+    public void deactivate(Long user_id) {
+        jdbcOperations.update("UPDATE users SET active = false WHERE user_id = ?", user_id);
     }
 
     @Override
-    public User reactivate(Long id) throws NotFoundException {
-        jdbcOperations.update("UPDATE users SET active = true WHERE id = ?", id);
-        return findById(id);
+    public User reactivate(Long user_id) throws NotFoundException {
+        jdbcOperations.update("UPDATE users SET active = true WHERE user_id = ?", user_id);
+        return findById(user_id);
+    }
+
+    @Override
+    public boolean authenticate(String username, String password) {
+        try {
+            User user = findByEmail(username);
+            return user.passwordHash().equals(password);
+        } catch (NotFoundException e) {
+            return false;
+        }
     }
 }
 

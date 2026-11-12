@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="350.0" spacing="15.0" style="-fx-background-color: #f4f4f9; -fx-padding: 30;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.upjs.edo.LoginController">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="350.0" spacing="15.0" style="-fx-background-color: #f4f4f9; -fx-padding: 30;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.upjs.edo.controllers.LoginController">
 
     <Label text="Prihlásenie">
         <font>
@@ -28,11 +28,11 @@
     <VBox spacing="5.0">
         <Label text="Heslo:" textFill="#555555" />
         <PasswordField fx:id="passwordField" promptText="Zadajte heslo" style="-fx-pref-height: 35; -fx-background-radius: 5;" />
-   
-       <Hyperlink alignment="CENTER_RIGHT" contentDisplay="RIGHT" onAction="#handleForgotPassword" prefHeight="24.0" prefWidth="105.0" style="-fx-text-fill: #6c757d; -fx-underline: false;" text="Zabudli ste heslo?" textAlignment="RIGHT" />
+
+        <Hyperlink alignment="CENTER_RIGHT" contentDisplay="RIGHT" onAction="#handleForgotPassword" prefHeight="24.0" prefWidth="105.0" style="-fx-text-fill: #6c757d; -fx-underline: false;" text="Zabudli ste heslo?" textAlignment="RIGHT" />
     </VBox>
 
     <Button fx:id="loginButton" maxWidth="Infinity" onAction="#handleLoginAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-height: 40; -fx-background-radius: 5; -fx-cursor: hand;" text="Prihlásiť sa" />
-   <Button fx:id="createAccountButton" maxWidth="Infinity" onAction="#createAccountButtonOnAction" style="-fx-background-color: #ffffff; -fx-text-fill: #007bff; -fx-font-weight: bold; -fx-pref-height: 40; -fx-background-radius: 5; -fx-cursor: hand;" text="Vytvoriť účet" />
+    <Button fx:id="createAccountButton" maxWidth="Infinity" onAction="#createAccountButtonOnAction" style="-fx-background-color: #ffffff; -fx-text-fill: #007bff; -fx-font-weight: bold; -fx-pref-height: 40; -fx-background-radius: 5; -fx-cursor: hand;" text="Vytvoriť účet" />
 
 </VBox>

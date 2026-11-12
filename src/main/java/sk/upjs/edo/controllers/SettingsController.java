@@ -1,4 +1,4 @@
-package sk.upjs.edo;
+package sk.upjs.edo.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
