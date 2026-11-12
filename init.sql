@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `users` (
                                        `email` VARCHAR(255) NOT NULL UNIQUE,
                                        `password_hash` VARCHAR(128) NOT NULL UNIQUE,
                                        `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                       `active` BOOLEAN NOT NULL DEFAULT true,
                                        PRIMARY KEY(`user_id`)
 );
 

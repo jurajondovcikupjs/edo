@@ -2,10 +2,10 @@
     mysql:
       image: mysql:9.7.2
       environment:
-        MYSQL_ROOT_PASSWORD:
-        MYSQL_DATABASE:
-        MYSQL_USER:
-        MYSQL_PASSWORD:
+        MYSQL_ROOT_PASSWORD: edoproject
+        MYSQL_DATABASE: edodb
+        MYSQL_USER: edo
+        MYSQL_PASSWORD: edoproject
       ports:
         - "3307:3306"
       volumes:
