@@ -21,6 +21,24 @@ CREATE TABLE IF NOT EXISTS `enum_accent_colors` (
                                                     PRIMARY KEY(`accent_color_id`)
 );
 
+INSERT IGNORE INTO `enum_languages` (`code`, `name`) VALUES
+    ('sk', 'Slovenčina'),
+    ('en', 'English'),
+    ('de', 'Deutsch'),
+    ('cs', 'Čeština');
+
+INSERT IGNORE INTO `enum_theme_modes` (`code`, `name`) VALUES
+    ('light', 'Svetlá'),
+    ('dark', 'Tmavá'),
+    ('system', 'Systémová');
+
+INSERT IGNORE INTO `enum_accent_colors` (`code`, `hex_value`) VALUES
+    ('blue', '#2196F3'),
+    ('green', '#4CAF50'),
+    ('red', '#F44336'),
+    ('purple', '#9C27B0');
+
+
 CREATE TABLE IF NOT EXISTS `users` (
                                        `user_id` BIGINT AUTO_INCREMENT UNIQUE,
                                        `name` VARCHAR(100) NOT NULL,

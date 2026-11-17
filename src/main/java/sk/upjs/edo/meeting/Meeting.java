@@ -43,6 +43,6 @@ public record Meeting(
     }
 
     public int duration_minutes() {
-        return 0;
+        return duration;
     }
 }

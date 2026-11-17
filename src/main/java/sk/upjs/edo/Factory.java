@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.edo.meeting.MeetingDao;
 import sk.upjs.edo.meeting.MysqlMeetingDao;
+import sk.upjs.edo.settings.MysqlSettingsDao;
+import sk.upjs.edo.settings.SettingsDao;
 import sk.upjs.edo.users.MysqlUserDao;
 import sk.upjs.edo.users.UserDao;
 
@@ -43,5 +45,9 @@ public enum Factory {
             meetingDao = new MysqlMeetingDao(getJdbcOperations());
         }
         return meetingDao;
+    }
+
+    public SettingsDao getSettingsDao() {
+        return new MysqlSettingsDao(getJdbcOperations());
     }
 }
